@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+    <div>
+        <h3>订单信息</h3>
+
+
+        <table class="table table-striped">
+            <tr>
+                <td>类型</td>
+                <td>{{ order.type }}</td>
+            </tr>
+            <tr>
+                <td>客户姓名</td>
+                <td>{{ order.customer }}</td>
+            </tr>
+            <tr>
+                <td>电话</td>
+                <td>{{ order.phone }}</td>
+            </tr>
+            <tr>
+                <td>地址</td>
+                <td>{{ order.address }}</td>
+            </tr>
+            <tr>
+                <td>总价值</td>
+                <td>{{ order.money }}</td>
+            </tr>
+            <tr>
+                <td>操作员</td>
+                <td>{{ order.user_name.username }}</td>
+            </tr>
+
+        </table>
+    </div>
+
+<hr/>
+
+    <h3>订单所有商品信息</h3>
+    <div>
+    <table class="table table-bordered table-striped">
+            <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>名称</th>
+                        <th>价格</th>
+                        <th>数量</th>
+
+                    </tr>
+            </thead>
+             <tbody>
+             {% for detail in order_detail_list %}
+                 <tr>
+                     <td>{{ forloop.counter }}</td>
+                     <td>{{ detail.fruit.name }}</td>
+                     <td>{{  detail.price}}</td>
+                     <td>{{  detail.number}}</td>
+                 </tr>
+             {% endfor %}
+             </tbody>
+
+         </table>
+    </div>
+
+
+<div class="row">
+        <div class="col-md-4 col-md-offset-3">
+        <a href={{ request.session.pre_path }}><button class="btn btn-primary ">退出</button></a>
+    </div>
+
+</body>
+</html>

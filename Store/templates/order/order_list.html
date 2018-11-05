@@ -1,0 +1,72 @@
+{% extends '../base.html' %}
+
+
+{% block me %}
+
+    <div class="list-group">
+            <a href="/order/" class="list-group-item active" >新订单</a>
+            <a href="/order/finish" class="list-group-item ">已处理订单</a>
+            <a href="/order/errors" class="list-group-item ">异常订单</a>
+
+    </div>
+{% endblock %}
+
+{% block con %}
+    <h3>订单列表</h3>
+    <a href="/order/add" class="btn btn-primary">添加订单</a>
+    <table class="table table table-hover">
+           <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>入库/出库</th>
+                    <th>客户姓名</th>
+                    <th>电话</th>
+                    <th>时间</th>
+                    <th>操作员</th>
+                    <th>操作</th>
+
+                </tr>
+           </thead>
+            <tbody>
+            {% for order in orders %}
+            <tr>
+                 <td>{{ forloop.counter }}</td>
+                 <td>{{ order.type }}</td>
+
+                <td>{{ order.customer }}</td>
+                <td>{{ order.phone }}</td>
+                <td>{{ order.date|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ order.user_name.username }}</td>
+                 <td>
+                     <a href="/order/content/{{ order.pk }}" class="btn btn-primary">添加/修改内容</a>
+                     <a href="/order/detail/{{ order.pk }}" class="btn btn-warning">订单详情</a>
+                     <a href="/order/delete/{{ order.pk }}" class="btn btn-danger">删除</a>
+                     <a href="/order/confirm/{{ order.pk }}" class="btn btn-danger">确认订单</a>
+
+                 </td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+    </table>
+
+    <div class="pagination">
+    <span class="step-links">
+        {% if orders.has_previous %}
+            <a href="?page=1">&laquo;第一页</a>
+            <a href="?page={{ orders.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ orders.number }} 页，共{{ orders.paginator.num_pages }}页.
+        </span>
+
+        {% if orders.has_next %}
+
+            <a href="?page={{ orders.paginator.num_pages }}">下一页 &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+
+{% endblock %}

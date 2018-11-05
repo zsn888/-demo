@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+
+        .header{
+            width: 100%;
+            height: 50px;
+            background-color: #336699;
+
+        }
+
+        .menu{
+            background-color: #f4fff3;
+            position: fixed;
+            top: 53px;
+            bottom: 0px;
+            left: 0px;
+            width: 200px;
+        }
+
+        .content{
+            position: fixed;
+            top: 50px;
+            bottom: 0;
+            right: 0;
+            left: 200px;
+            overflow: auto;
+            padding: 30px;
+
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="header " >
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+
+            <a class="navbar-brand " href="/users/">人员管理</a>
+            <a class="navbar-brand " href="/order/">订单管理</a>
+            <a class="navbar-brand " href="/stock/">库存管理</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <ul class="nav navbar-nav navbar-right">
+             <li> <a>{{ request.user.username }}</a></li>
+            <li><a href="/login">登录</a></li>
+            <li><a href="/logout">退出</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+</div>
+<div class="contain">
+
+        <div class="menu">
+            {% block me %}
+
+
+            {% endblock %}
+
+        </div>
+        <div class="content">
+        {% block con %}
+
+
+        {% endblock %}
+
+        </div>
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="form-wrapper">
+    <h3>请编辑信息</h3>
+       <form method="post" action="/users/edit/{{ user.pk }}" class="form-horizontal" novalidate>
+          {% csrf_token %}
+          {% for field in form %}
+               <div class="form-group">
+                <label class="col-sm-3 control-label">
+                   {{ field.label_tag }}
+               </label>
+               <div class="col-sm-6 ">
+                   {{ field }}
+
+                   {{ field.errors}}
+               </div>
+
+               </div>
+            {% endfor %}
+          <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-8">
+                  <input class="btn btn-info" type="submit" id="btnSave" value="保存">
+              </div>
+          </div>
+       </form>
+
+    </div>
+
+
+
+</body>
+
+<style>
+
+</style>
+
+</html>

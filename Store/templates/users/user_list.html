@@ -1,0 +1,65 @@
+{% extends '../base.html' %}
+{% block con %}
+    <h3>用户列表</h3>
+    <a href="/users/add" class="btn btn-primary">添加用户</a>
+    <table class="table table-bordered table-striped">
+           <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>角色</th>
+                    <th>性别</th>
+                    <th>电话</th>
+                    <th>操作</th>
+
+                </tr>
+           </thead>
+            <tbody>
+            {% for user in user_list %}
+            <tr>
+                 <td>{{ forloop.counter }}</td>
+                 <td>{{ user.username }}</td>
+                 <td>
+                     {% for role in user.roles.all %}
+                     {{ role.title }}
+                     {% endfor %}
+
+                 </td>
+                <td>{{ user.gender }}</td>
+                <td>{{ user.phone }}</td>
+
+                 <td>
+
+                     <a href="/users/delete/{{ user.pk }}" class="btn btn-danger">删除</a>
+                     <a href="/users/edit/{{ user.pk }}" class="btn btn-warning">编辑</a>
+
+                 </td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+    </table>
+
+    <div class="pagination">
+    <span class="step-links">
+        {% if user_list.has_previous %}
+            <a href="?page=1">&laquo;第一页</a>
+            <a href="?page={{ user_list.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ user_list.number }} 页，共{{ user_list.paginator.num_pages }}页.
+        </span>
+
+        {% if user_list.has_next %}
+
+            <a href="?page={{ user_list.paginator.num_pages }}">下一页 &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+
+
+
+
+{% endblock %}

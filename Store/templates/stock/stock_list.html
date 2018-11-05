@@ -1,0 +1,71 @@
+{% extends '../base.html' %}
+
+
+{% block me %}
+
+
+    <div class="list-group">
+          <a href="/stock/" class="list-group-item active">库存</a>
+          <a href="/stock/agenda/" class="list-group-item ">待处理</a>
+          <a href="/stock/finish/" class="list-group-item ">已完成</a>
+     </div>
+{% endblock %}
+
+{% block con %}
+    <h3>库存列表</h3>
+    <a href="/stock/add" class="btn btn-primary">添加品种</a>
+    <table class="table table-bordered table-striped">
+           <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>名称</th>
+                    <th>总数量</th>
+                    <th>可用数量</th>
+                    <th>单位</th>
+                    <th>备注</th>
+                    <th>操作</th>
+
+                </tr>
+           </thead>
+            <tbody>
+            {% for fruit in fruit_list %}
+            <tr>
+                 <td>{{ forloop.counter }}</td>
+                 <td>{{ fruit.name }}</td>
+
+                <td>{{ fruit.total }}</td>
+                <td>{{ fruit.user_number }}</td>
+                <td>{{ fruit.unit }}</td>
+                <td>{{ fruit.comment|default:"" }}</td>
+                 <td>
+
+                     <a href="/stock/delete/{{ fruit.pk }}" class="btn btn-danger">删除</a>
+                     <a href="/stock/edit/{{ fruit.pk }}" class="btn btn-warning">编辑</a>
+
+                 </td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+    </table>
+
+    <div class="pagination">
+    <span class="step-links">
+        {% if fruit_list.has_previous %}
+            <a href="?page=1">&laquo;第一页</a>
+            <a href="?page={{ fruit_list.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ fruit_list.number }} 页，共{{ fruit_list.paginator.num_pages }}页.
+        </span>
+
+        {% if fruit_list.has_next %}
+
+            <a href="?page={{ fruit_list.paginator.num_pages }}">下一页 &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+
+{% endblock %}
