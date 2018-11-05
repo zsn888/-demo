@@ -81,7 +81,7 @@ def stock_edit(request, id):
     return render(request, "stock/stock_edit.html", locals())
 
 
-def stock_delete(request,id):
+def stock_delete(request, id):
     Fruit.objects.filter(pk=id).delete()
     return redirect("/stock/")
 
@@ -136,6 +136,7 @@ def stock_confirm(request, id):
 
 def stock_finish(request):
     order_list = Order.objects.filter(status=3).order_by("date")
+    print(len(order_list))
     paginator = Paginator(list(order_list), 5)
     page = request.GET.get('page')
     try:
