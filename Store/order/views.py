@@ -5,8 +5,8 @@ from django.forms import widgets as wid
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms import ModelForm
 from django.db import transaction
-# Create your views here.
 from django.core.exceptions import ValidationError
+
 
 class OrderForm(ModelForm):
     class Meta:
@@ -183,7 +183,6 @@ def order_confirm(request, id):
                     order.save()
                     return redirect("/order/errors/")
 
-
             order.status = 2             # 确认成功
             order.save()
             transaction.savepoint_commit(tran)
@@ -194,7 +193,6 @@ def order_confirm(request, id):
                 use_number = detail.fruit.user_number
                 detail.fruit.user_number = use_number + detail.number
                 detail.fruit.save()
-
 
             order.status = 2
             order.save()
@@ -207,7 +205,6 @@ def order_confirm(request, id):
         order.save()
         return redirect("/order/errors/")
 
-    # return redirect("/stock/")
 
 
 def order_errors(request):

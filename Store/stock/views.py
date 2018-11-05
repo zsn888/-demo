@@ -78,7 +78,6 @@ def stock_edit(request, id):
             form.save()
             return redirect("/stock/")
 
-
     return render(request, "stock/stock_edit.html", locals())
 
 

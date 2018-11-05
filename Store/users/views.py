@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from django.forms import widgets as wid
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
 class UserForm(ModelForm):
     # gender = forms.ChoiceField(choices=((1, '男'), (2, '女')),label="性别",)
     class Meta:

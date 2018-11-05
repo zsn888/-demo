@@ -50,9 +50,6 @@ def login(request):
             print(permisssion_list)
 
             return redirect('/index/')
-
-            # else:
-            #     return render(request, 'login.html', {'form':form_obj,'message':"密码错误"})
         else:
             return render(request, 'login.html', {'form': form_obj})
     form_obj = LoginForm()
